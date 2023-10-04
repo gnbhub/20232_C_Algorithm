@@ -1,0 +1,170 @@
+| 작성자  |   날짜   | 언어    |
+| ------- | --------- | ------- |
+| 이유준  | 23.10.04  | c  |
+
+# 제로
+
+ - https://www.acmicpc.net/problem/10866
+  
+### 풀이 과정  
+
+기존 큐 기반을 활용하여 덱이 될수 있도록 front, back에서 push, pop 할 수 있는 기능을 추가하고 연속적인 형태를 갖추도록 0에서 넘어가면 9999로 9999에서 넘어가면 0으로 가도록 만들었습니다.
+
+
+### 소스 코드
+```c
+#include <stdio.h>
+#include <string.h>
+#define STACK_SIZE 10000
+
+int queue[STACK_SIZE];
+int front = 0;
+int rear = 9999;
+char a[20];
+int stnum;
+int rnd;
+int r;
+int size1;
+
+void pushf(int num){
+    if(front == 9999){
+        queue[front] = num;
+        front = 0;
+    }
+    else{
+        queue[front++] = num;
+    }
+    size1++;
+}
+
+void pushb(int num){
+    if(rear == 0){
+        queue[rear] = num;
+        rear = 9999;
+    }
+    else{
+        queue[rear--] = num;
+    }
+    size1++;
+}
+
+int popf(){
+    if(size1 == 0){
+        return -1;
+    }
+    else{
+        if(front == 0){
+            front = 9999;            
+            r = queue[front];
+            size1--;
+        }
+        else{
+            r = queue[front -1];
+            front--;
+            size1--;
+        }
+    }
+    return r;    
+}
+
+int popb(){
+    if(size1 == 0){
+        return -1;
+    }
+    else{
+        if(rear == 9999){
+            rear = 0;
+            r = queue[rear];
+            size1--;
+        }
+        else{
+            r = queue[rear +1];
+            rear++;
+            size1--;
+        }
+    }
+    return r;
+}
+
+int size(){
+    return size1;
+}
+
+int empty(){
+    if(size1 == 0){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int front1(){
+    if(size1 == 0){
+        return -1;
+    }
+    else{
+        if(front == 0){
+            return queue[9999];
+        }    
+        else{
+            return queue[front -1];
+        }
+    }
+}
+
+int back(){
+    if(size1 == 0){
+        return -1;
+    }
+    else{
+        if(rear == 9999){
+            return queue[0];
+        }
+        else{    
+            return queue[rear + 1];
+        }
+    }
+}
+
+int main(){
+    int i;
+    scanf("%d", &rnd);
+
+    for(i=0; i < rnd; i++){
+        scanf("%s", &a);
+        if(strcmp(a, "push_front") == 0){
+            scanf("%d",&stnum);
+            pushf(stnum);
+        }
+        else if(strcmp(a, "push_back") == 0){
+            scanf("%d", &stnum);
+            pushb(stnum);
+        }
+        else if(strcmp(a, "pop_front") == 0){
+            printf("%d\n", popf());
+        }
+        else if(strcmp(a, "pop_back") == 0){
+            printf("%d\n", popb());
+        }
+        else if(strcmp(a, "size") == 0){
+            printf("%d\n", size());
+        }
+        else if(strcmp(a, "empty") == 0){
+            printf("%d\n", empty());
+        }
+        else if(strcmp(a, "front") == 0){
+            printf("%d\n", front1());    
+        }
+        else if(strcmp(a, "back") == 0){
+            printf("%d\n", back());
+        }        
+    }
+
+    return 0;
+}
+
+```
+### 결과 화면
+
+  
