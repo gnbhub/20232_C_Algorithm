@@ -1,0 +1,93 @@
+| 작성자  |   날짜   | 언어    |
+| ------- | --------- | ------- |
+| 강선우  | 23.11.08  | c  |
+
+# 
+
+ 
+  
+
+### 풀이 과정  
+
+큐의 front와 rear를 사용하여 명령을 처리하고 결과를 출력하고 스텍문제와 비슷하게 각각의 정의를 이용해서 함수를 만들어서 문제를 풀
+었습니다. 
+
+### 소스 코드
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_QUEUE_SIZE 10000
+
+int queue[MAX_QUEUE_SIZE];
+int front = 0, rear = -1;
+
+void push(int x) {
+    if (rear == MAX_QUEUE_SIZE - 1) {
+        printf("Queue is full.\n");
+        return;
+    }
+    queue[++rear] = x;
+}
+
+int pop() {
+    if (front > rear) {
+        return -1;
+    }
+    return queue[front++];
+}
+
+int size() {
+    return (rear - front + 1);
+}
+
+int empty() {
+    return (front > rear) ? 1 : 0;
+}
+
+int front_() {
+    if (front > rear) {
+        return -1;
+    }
+    return queue[front];
+}
+
+int back() {
+    if (front > rear) {
+        return -1;
+    }
+    return queue[rear];
+}
+
+int main() {
+    int n, x;
+    char command[10];
+
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf("%s", command);
+
+        if (strcmp(command, "push") == 0) {
+            scanf("%d", &x);
+            push(x);
+        } else if (strcmp(command, "pop") == 0) {
+            printf("%d\n", pop());
+        } else if (strcmp(command, "size") == 0) {
+            printf("%d\n", size());
+        } else if (strcmp(command, "empty") == 0) {
+            printf("%d\n", empty());
+        } else if (strcmp(command, "front") == 0) {
+            printf("%d\n", front_());
+        } else if (strcmp(command, "back") == 0) {
+            printf("%d\n", back());
+        }
+    }
+
+    return 0;
+}
+
+```
+
+### 결과 화면
