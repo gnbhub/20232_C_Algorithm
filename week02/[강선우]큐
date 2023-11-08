@@ -1,46 +1,95 @@
 | 작성자  |   날짜   | 언어    |
 | ------- | --------- | ------- |
-| 강선우  | 23.09.20  | c  |
+| 강선우  | 23.11.08  | c  |
 
 # 
 
- - https://www.acmicpc.net/problem/4101
+ - https://www.acmicpc.net/problem/10845
   
 
 ### 풀이 과정  
 
-두 수를 M N으로 두고 무한 루프문을 사용하여 풀었다
-큰 수를 판별하는 if - else문 아래 break을 두어 둘 다 0을 넣었을 떄도
-No라고 나왔었다 이를 통해 순서도 결과에 영향을 미치므로 조심해야 된다는 것을 느꼈다.
+큐의 front와 rear를 사용하여 명령을 처리하고 결과를 출력하고
+스텍문제와 비슷하게 각각의 정의를 이용해서 함수를 만들어서 문제를 해결하였습니다.
 
 ### 소스 코드
 
 ```c
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-int main() {
-   
-   int M, N;
-   
-   while (1){
-      scanf("%d", &M);
-      scanf("%d", &N);
+#include <string.h>
 
-      if (M == 0 && N == 0)
-         break;
+#define MAX_QUEUE_SIZE 10000
 
-      if (M > N) {
-         printf("Yes\n");
-      }
+int queue[MAX_QUEUE_SIZE];
+int front = 0, rear = -1;
 
-      else printf("No\n");
-      
-   }
-   
-   return 0;
+void push(int x) {
+    if (rear == MAX_QUEUE_SIZE - 1) {
+        printf("Queue is full.\n");
+        return;
+    }
+    queue[++rear] = x;
 }
+
+int pop() {
+    if (front > rear) {
+        return -1;
+    }
+    return queue[front++];
+}
+
+int size() {
+    return (rear - front + 1);
+}
+
+int empty() {
+    return (front > rear) ? 1 : 0;
+}
+
+int front_() {
+    if (front > rear) {
+        return -1;
+    }
+    return queue[front];
+}
+
+int back() {
+    if (front > rear) {
+        return -1;
+    }
+    return queue[rear];
+}
+
+int main() {
+    int n, x;
+    char command[10];
+
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf("%s", command);
+
+        if (strcmp(command, "push") == 0) {
+            scanf("%d", &x);
+            push(x);
+        } else if (strcmp(command, "pop") == 0) {
+            printf("%d\n", pop());
+        } else if (strcmp(command, "size") == 0) {
+            printf("%d\n", size());
+        } else if (strcmp(command, "empty") == 0) {
+            printf("%d\n", empty());
+        } else if (strcmp(command, "front") == 0) {
+            printf("%d\n", front_());
+        } else if (strcmp(command, "back") == 0) {
+            printf("%d\n", back());
+        }
+    }
+
+    return 0;
+}
+
 ```
 
 ### 결과 화면
 
-![image](https://github.com/gnbhub/20232_C_Algorithm/assets/127831078/a2b00a36-d189-4faf-a6e6-4434f9615187
+
