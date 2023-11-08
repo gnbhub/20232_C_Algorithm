@@ -1,0 +1,134 @@
+| 작성자  |   날짜   | 언어    |
+| ------- | --------- | ------- |
+| 김승현    | 23.11.18  | C  |
+
+# Problem_Title
+
+ - https://www.acmicpc.net/problem/10866
+  
+
+### 풀이 과정  
+
+
+
+### 소스 코드
+
+``` C
+/******************************************************************************
+덱 문제
+push_front, push_back, push_front, pop_back, size, empty, front, back
+덱은 앞에서 뒤에서 둘다 넣기 가능
+명령수 는 쵀대 10,000
+
+*******************************************************************************/
+#include <stdio.h>
+#include <string.h>
+
+long deck[10000];
+int front = 0; 
+int back = 10000; 
+
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    long x;
+    char s[100];
+
+    
+    for(int i=0; i<n; i++) {
+        scanf("%s",s);
+        if(strcmp(s,"push_front") == 0) {
+            scanf("%ld",&x);
+            front += 10000;
+            front %= 10000;
+            deck[front] = x; 
+            front++;
+        }
+        
+        else if(strcmp(s,"push_back") == 0) {
+            scanf("%ld",&x);
+            back +=10000;
+            back--;
+            back %= 10000;
+            deck[back] = x;
+        }
+        
+        else if(strcmp(s,"pop_front") == 0) {
+            if( (front % 10000) == (back % 10000) ) printf("-1\n");
+            else {
+                front += 10000;
+                front--;
+                front %= 10000;
+                printf("%ld\n",deck[front]);
+            }
+        }
+        
+        else if(strcmp(s,"pop_back") == 0) {
+            if(back%10000 == (front % 10000) ) printf("-1\n");
+            else {
+                back += 10000;
+                back %= 10000;
+                printf("%ld\n",deck[back]);
+                back++;
+            }
+        }
+        
+        else if(strcmp(s,"size") == 0) {
+            back = back + 10000;
+            back %= 10000;
+            
+            front = front + 10000;
+            front %= 10000;
+            
+            int size = 0;
+            
+            if(back > front){
+                size = size + front;
+                size = size + 10000 - back;
+            }
+            
+            else if(back == front){
+                size =0;
+            }
+            
+            else if(back < front) {
+                size = front - back;                
+            }
+            
+            
+            printf("%d\n",size);
+        }
+        
+        else if(strcmp(s,"empty") == 0) {
+            if(front%10000 == back%10000) printf("1\n");
+            else printf("0\n");
+        }
+        
+        else if(strcmp(s,"front") == 0) {
+            if(front%10000 == back %10000 ) printf("-1\n");
+            else {
+                front += 10000;
+                int check = (front - 1) % 10000;
+                front %= 10000;
+                printf("%ld\n",deck[check]);
+                }
+        }
+        
+        else if(strcmp(s,"back") == 0) {
+            if(back%10000 == front % 10000) printf("-1\n");
+            else {
+                
+                printf("%ld\n",deck[back%10000]);
+            }
+        }
+        
+    }
+
+    return 0;
+}
+
+```
+
+### 결과 화면
