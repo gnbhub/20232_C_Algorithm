@@ -2,7 +2,7 @@
 | ------- | --------- | ------- |
 | 이유준  | 23.11.08  | c    |
 
-# BFS와 DFS
+# BFS_DFS
 
 
  - https://www.acmicpc.net/problem/1260
