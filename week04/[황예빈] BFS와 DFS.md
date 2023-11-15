@@ -37,6 +37,7 @@ int n, m, v; // 노드, 간선, 탐색을 시작할 정점의 번호
 
 vector<vector<int>> graph;
 vector<int> bfs_chk;
+vector<int> dfs_chk;
 
 void bfs(int now){ // 현재 방문 중인 노드를 argument로 받음 
 
@@ -60,6 +61,21 @@ void bfs(int now){ // 현재 방문 중인 노드를 argument로 받음
             
         }
         
+    }
+
+}
+
+void dfs(int now){
+    dfs_chk[now] = 1;
+    std::: cout << now << " ";
+
+    for(int i = 0; i < graph[now].size(); i++){
+
+        int next = graph[now][i];
+        if(!dfs_chk[next]){
+            dfs(next);
+        }
+
     }
 
 }
@@ -95,6 +111,9 @@ int main(){
 
 
 }
+
+
+
 
 
 
