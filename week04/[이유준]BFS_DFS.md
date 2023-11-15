@@ -12,9 +12,10 @@
 ```c
 #include <stdio.h>
 
-int sheet[1000][1000];
-int visit[1000];
-int queue[1000];
+int sheet[1001][1001];
+int visit1[1001];
+int visit2[1001];
+int queue[1001];
 int front, rear;
 
 void fqueue(int c){
@@ -27,17 +28,27 @@ int rqueue(){
 
 void bfs(int a, int c){
     printf("%d ", c);
-    visit[c] = 1;
+    visit2[c] = 1;
     fqueue(c);
 
     while(front != rear){
         int current = rqueue();
         for(int i = 1; i <= a; i++){
-            if((sheet[current][i] == 1) && (visit[i] == 0)){
+            if((sheet[current][i] == 1) && (visit2[i] == 0)){
                 printf("%d ", i);
                 fqueue(i);
-                visit[i] = 1;
+                visit2[i] = 1;
             }
+        }
+    }
+}
+
+void dfs(int a, int c){
+    visit1[c] = 1;
+    printf("%d ", c);
+    for(int i = 1; i <= a; i++){
+        if((sheet[c][i] == 1) && (visit1[i] == 0)){
+            dfs(a, i);
         }
     }
 }
@@ -51,6 +62,8 @@ int main(){
         sheet[x][y] = 1;
         sheet[y][x] = 1;
     }
+    dfs(a, c);
+    printf("\n");
     bfs(a, c);
 
     return 0;
