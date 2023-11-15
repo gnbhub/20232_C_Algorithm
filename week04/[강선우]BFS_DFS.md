@@ -1,3 +1,18 @@
+| 작성자  |   날짜   | 언어    |
+| ------- | --------- | ------- |
+| 강선우  | 23.11.15  | c  |
+
+# 
+
+
+  
+
+### 풀이 과정  
+
+
+### 소스 코드
+
+```c
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -54,17 +69,21 @@ int main() {
         graph[b].push_back(a);
     }
 
+    
     for (int i = 1; i <= N; ++i) {
         sort(graph[i].begin(), graph[i].end());
     }
 
- 
     dfs(V);
     cout << "\n";
 
-  
     bfs(V);
     cout << "\n";
 
     return 0;
 }
+
+```
+
+### 결과 화면
+
