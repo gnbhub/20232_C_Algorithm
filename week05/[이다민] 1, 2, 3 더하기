@@ -1,0 +1,51 @@
+| 작성자  |   날짜   | 언어    |
+| ------- | --------- | ------- |
+| 이다민  | 23.11.15  | c  |
+
+# 1,2,3 더하기
+
+ - https://www.acmicpc.net/status?from_mine=1&problem_id=9095&user_id=yeevin
+  
+
+### 풀이 과정  
+
+
+
+### 소스 코드
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+
+int dp[11];
+
+int main(void) {
+
+	int T;
+	scanf("%d", &T);
+
+	int i, j, n;
+
+	dp[1] = 1;
+	dp[2] = 2;
+	dp[3] = 4;
+
+	for (i = 0; i < T; i++) {
+		scanf("%d", &n);
+
+		for (j = 4; j < n; j++) {
+			dp[j] = dp[j - 3] + dp[j - 2] + dp[j - 1];
+		}
+
+		printf("%d\n", dp[n]);
+
+	}
+
+	return 0;
+}
+
+```
+
+### 결과 화면
+
+<img width="803" alt="image" src="https://github.com/gnbhub/20232_C_Algorithm/assets/108808701/b9cd5bc4-bece-46eb-8a8e-f2f6190e2f96">
